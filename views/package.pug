@@ -22,5 +22,15 @@ html
         dt Home page
         dd <a href="#{pkg.url}">#{pkg.url}</a>
 
+      if pkg.deps
+        dt Dependencies
+        dd
+          ul
+            for dep in pkg.deps
+              if dep.name === "emacs"
+                li emacs-#{dep.ver}
+              else
+                li <a href="/package/#{dep.name}">#{dep.name}</a>
+  
     h2 Commentary
     pre TODO

@@ -45,6 +45,18 @@ function getPkgs() {
       }
     }
 
+    for (const elpa in elpas) {
+      if (pkg[elpa]?.deps) {
+        pkg.deps = {};
+        const deps = pkg[elpa].deps;
+        for (const name in deps) {
+          const ver = deps[name].join(".");
+          pkg.deps[name] = { name, ver };
+        }
+        break;
+      }
+    }
+
     pkg.vers = {};
     for (const elpa in elpas) {
       if (pkg[elpa]) {
