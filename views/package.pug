@@ -7,30 +7,31 @@ html
     style
       include style.css
   body
-    h1= pkg.name
-    dl
-      dt Description
-      dd= pkg.desc
-
-      dt Versions
-      dd
-        ul
-          for ver in pkg.vers
-            li #{ver.elpa} <a href="#{ver.url}">#{pkg.name}-#{ver.name}</a>
-
-      if pkg.url
-        dt Home page
-        dd <a href="#{pkg.url}">#{pkg.url}</a>
-
-      if pkg.deps
-        dt Dependencies
+    .container
+      h1= pkg.name
+      dl
+        dt Description
+        dd= pkg.desc
+  
+        dt Versions
         dd
           ul
-            for dep in pkg.deps
-              if dep.name === "emacs"
-                li emacs-#{dep.ver}
-              else
-                li <a href="/package/#{dep.name}">#{dep.name}</a>
+            for ver in pkg.vers
+              li #{ver.elpa} <a href="#{ver.url}">#{pkg.name}-#{ver.name}</a>
   
-    h2 Commentary
-    pre TODO
+        if pkg.url
+          dt Home page
+          dd <a href="#{pkg.url}">#{pkg.url}</a>
+  
+        if pkg.deps
+          dt Dependencies
+          dd
+            ul
+              for dep in pkg.deps
+                if dep.name === "emacs"
+                  li emacs-#{dep.ver}
+                else
+                  li <a href="/package/#{dep.name}">#{dep.name}</a>
+    
+      h2 Commentary
+      pre TODO
