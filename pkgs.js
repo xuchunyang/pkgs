@@ -37,14 +37,24 @@ const pkgsObject = getPkgs();
 const pkgsArray = Object.values(pkgsObject);
 const pkgsNames = Object.keys(pkgsObject);
 
-function getPage(page, numPerPage) {
-  if (!Number.isInteger(page)) throw new Error("Invalid page number");
-  if (page < 1) throw new Error("Page number too small");
-  const maxPage = Math.ceil(pkgsArray.length / numPerPage);
-  if (page > maxPage) throw new Error("Page number too big");
-
+// XXX cache search results? worth? if so how?
+function getPage(search, page, numPerPage) {
   const skip = (page - 1) * numPerPage;
-  return pkgsArray.slice(skip, skip + numPerPage);
+  let matches;
+  if (!search) {
+    matches = pkgsArray;
+  } else {
+    matches = [];
+    for (let i = 0; i < pkgsNames.length; i++) {
+      if (pkgsNames[i].includes(search)) {
+        matches.push(pkgsArray[i]);
+      }
+    }
+  }
+  debug("matches.length: %d", matches.length);
+  const maxPage = Math.ceil(matches.length / numPerPage);
+  const result = matches.slice(skip, skip + numPerPage);
+  return { result, maxPage };
 }
 
 module.exports = { pkgsObject, pkgsArray, pkgsNames, getPage };

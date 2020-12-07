@@ -13,19 +13,14 @@ app.use("/api", express.static("data"));
 app.set("view engine", "pug");
 app.set("views", "views");
 
+// IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {
-  // TODO 不完善，干脆先去掉
-  // if (req.query.page && !/^\d+$/.test(req.query.page)) {
-  //   res.status(404);
-  //   throw new Error(`No such page: ${req.query.page}`);
-  // }
+  const search = req.query.search;
   const page = parseInt(req.query.page) || 1;
-  debug("Page: %d", page);
-  const numPerPage = 50;
-  const maxPage = Math.ceil(pkgs.pkgsArray.length / numPerPage);
-  debug("maxPage: %d", maxPage);
+  debug("%o", { search, page });
+  const { result, maxPage } = pkgs.getPage(search, page, 50);
   const locals = {
-    pkgs: pkgs.getPage(page, numPerPage),
+    pkgs: result,
     page,
     maxPage,
   };
