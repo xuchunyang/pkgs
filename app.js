@@ -8,7 +8,12 @@ app.use(morgan("dev"));
 
 // TODO 直接用 Caddy 处理
 // http://127.0.0.1:3000/api/gnu/archive-contents.json
-app.use("/api", express.static("data"));
+// app.use("/api", express.static("data"));
+
+// for debug purpose
+app.get("/api/packages/:name", (req, res) => {
+  res.json(pkgs.pkgsObject[req.params.name]);
+});
 
 app.set("view engine", "pug");
 app.set("views", "views");

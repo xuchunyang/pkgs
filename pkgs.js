@@ -74,6 +74,11 @@ function getPkgs() {
         pkg.vers[elpa] = { name, elpa, url };
       }
     }
+
+    const commentaryFile = `./data/commentary/${pkg.name}`;
+    if (fs.existsSync(commentaryFile)) {
+      pkg.commentary = fs.readFileSync(commentaryFile, "utf8");
+    }
   }
 
   return sortedPkgs;
