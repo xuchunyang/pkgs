@@ -6,6 +6,7 @@ body {
 body {
   max-width: 960px;
   margin: 0 auto;
+  line-height: 1.5;
 }
 
 .container {
@@ -16,7 +17,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 1em
+  margin: 0 1em;
 }
 
 #search input[type="search"] {
@@ -80,4 +81,17 @@ footer {
   font-size: 85%;
   color: #666;
   text-align: center;
+}
+
+/* http://elpa.gnu.org/layout.css */
+pre {
+  font-size: 14px;
+  background-color: #fafafa;
+  padding: 15px;
+  border: 1px solid #dadada;
+  overflow-y: auto;
+}
+
+dd ul {
+  margin: 0;
 }
