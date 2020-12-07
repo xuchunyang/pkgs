@@ -13,7 +13,10 @@ html
       dd= pkg.desc
 
       dt Versions
-      dd TODO
+      dd
+        ul
+          for ver in pkg.vers
+            li <a href="#{ver.url}">#{pkg.name}-#{ver.name}</a>
 
       dt Home page
       dd TODO

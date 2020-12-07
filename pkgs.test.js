@@ -1,4 +1,4 @@
-const { pkgsNames, getPage } = require("./pkgs");
+const { pkgsNames, pkgsObject, getPage } = require("./pkgs");
 
 function sorted(array) {
   for (let i = 0; i < array.length - 1; i++) {
@@ -15,10 +15,17 @@ test("pkgs is sorted", () => {
 
 test("getpkgs search", () => {
   // 五个结果
-  console.log(getPage("zone", 1, 100).map((pkg) => pkg.name));
-  expect(getPage("zone", 1, 100).length).toBeGreaterThanOrEqual(5);
+  console.log(getPage("zone", 1, 100).result.map((pkg) => pkg.name));
+  expect(getPage("zone", 1, 100).result.length).toBeGreaterThanOrEqual(5);
 
-  expect(getPage("zone", 1, 2).length).toBe(2);
-  expect(getPage("zone", 2, 2).length).toBe(2);
-  expect(getPage("zone", 3, 2).length).toBe(1);
+  expect(getPage("zone", 1, 2).result.length).toBe(2);
+  expect(getPage("zone", 2, 2).result.length).toBe(2);
+  expect(getPage("zone", 3, 2).result.length).toBe(1);
+});
+
+test("pkg contains desc and vers", () => {
+  console.log(JSON.stringify(pkgsObject.magit, null, 2));
+
+  expect(pkgsObject.magit.desc).toBeDefined();
+  expect(pkgsObject.magit.vers).toBeDefined();
 });

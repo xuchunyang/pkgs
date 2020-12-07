@@ -3,7 +3,12 @@ const fs = require("fs");
 
 function getPkgs() {
   const pkgs = {};
-  for (const elpa of ["gnu", "melpa", "melpa-stable"]) {
+  const elpas = {
+    gnu: "https://elpa.gnu.org/packages/",
+    melpa: "https://melpa.org/packages/",
+    "melpa-stable": "https://stable.melpa.org/packages/",
+  };
+  for (const elpa in elpas) {
     const jsonFile = `./data/${elpa}/archive-contents.json`;
     debug("loading %s ...", jsonFile);
     const contents = fs.readFileSync(jsonFile, "utf8");
@@ -22,12 +27,27 @@ function getPkgs() {
     .sort((name1, name2) => (name1 > name2 ? 1 : -1));
   const sortedPkgs = {};
   for (const name of sortedNames) {
-    sortedPkgs[name] = pkgs[name];
+    const pkg = pkgs[name];
 
-    sortedPkgs[name].desc =
-      pkgs[name].melpa?.desc ||
-      pkgs[name].gnu?.desc ||
-      pkgs[name]["melpa-stable"]?.desc;
+    sortedPkgs[name] = pkg;
+
+    for (const elpa in elpas) {
+      if (pkg[elpa]?.desc) {
+        pkg.desc = pkg[elpa].desc;
+        break;
+      }
+    }
+
+    pkg.vers = {};
+    for (const elpa in elpas) {
+      if (pkg[elpa]) {
+        const name = pkg[elpa].ver.join(".");
+        // http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/package-build-20201206.2137.tar
+        const ext = pkg[elpa].type === "single" ? ".el" : ".tar";
+        const url = elpas[elpa] + pkg.name + "-" + name + ext;
+        pkg.vers[elpa] = { name, url };
+      }
+    }
   }
 
   return sortedPkgs;
