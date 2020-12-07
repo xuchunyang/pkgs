@@ -26,6 +26,9 @@ html
             if n === page
               li <a href="#" class="active">#{n}</a>
             else
-              li <a href="/?page=#{n}">#{n}</a>
+              if search
+                li <a href="/?search=#{search}&page=#{n}">#{n}</a>
+              else
+                li <a href="/?page=#{n}">#{n}</a>
             - n++
       include foot.pug

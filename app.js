@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
   debug("%o", { search, page });
   const { result, maxPage } = pkgs.getPage(search, page, 50);
   const locals = {
+    search,
     pkgs: result,
     page,
     maxPage,
