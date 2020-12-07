@@ -2,6 +2,7 @@ const debug = require("debug")("pkgs");
 const express = require("express");
 const morgan = require("morgan");
 const pkgs = require("./pkgs");
+const fs = require("fs");
 
 const app = express();
 app.use(morgan("dev"));
@@ -19,6 +20,9 @@ app.set("view engine", "pug");
 app.set("views", "views");
 
 app.locals.datefns = require("date-fns");
+const lastUpdated = new Date(
+  parseInt(fs.readFileSync("./data/update_timestamp", "utf8")) * 1000
+);
 
 // IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {
@@ -30,7 +34,7 @@ app.get("/", (req, res) => {
     pkgs: result,
     page,
     maxPage,
-    lastUpdated: pkgs.lastUpdated,
+    lastUpdated,
   };
   res.render("index", locals);
 });
@@ -40,7 +44,7 @@ app.get("/package/:name", (req, res) => {
   if (!pkg) {
     throw new Error("No such package");
   }
-  res.render("package", { pkg, lastUpdated: pkgs.lastUpdated });
+  res.render("package", { pkg, lastUpdated });
 });
 
 const server = app.listen(
