@@ -1,0 +1,23 @@
+{
+  "name": "pkgs",
+  "version": "1.0.0",
+  "description": "Packages Search for GNU ELPA, MELPA, and MELPA-stable.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "debug": "^4.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "jest": "^26.6.3"
+  }
+}
