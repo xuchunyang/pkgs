@@ -33,7 +33,9 @@ html
                   li emacs-#{dep.ver}
                 else
                   li <a href="/package/#{dep.name}">#{dep.name}</a>
-    
-      h2 Commentary
-      pre TODO
+
+      if pkg.commentary
+        h2 Commentary
+        pre= pkg.commentary
+
       include foot.pug
