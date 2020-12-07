@@ -18,6 +18,8 @@ app.get("/api/packages/:name", (req, res) => {
 app.set("view engine", "pug");
 app.set("views", "views");
 
+app.locals.datefns = require("date-fns");
+
 // IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {
   const search = req.query.search;
@@ -28,6 +30,7 @@ app.get("/", (req, res) => {
     pkgs: result,
     page,
     maxPage,
+    lastUpdated: pkgs.lastUpdated,
   };
   res.render("index", locals);
 });
@@ -37,7 +40,7 @@ app.get("/package/:name", (req, res) => {
   if (!pkg) {
     throw new Error("No such package");
   }
-  res.render("package", { pkg });
+  res.render("package", { pkg, lastUpdated: pkgs.lastUpdated });
 });
 
 const server = app.listen(

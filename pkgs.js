@@ -108,6 +108,10 @@ function getPage(search, page, numPerPage) {
   return { result, maxPage };
 }
 
+const lastUpdated = new Date(
+  parseInt(fs.readFileSync("./data/update_timestamp", "utf8")) * 1000
+);
+
 module.exports = {
   pkgsObject,
   pkgsArray,
@@ -115,4 +119,5 @@ module.exports = {
   getPage,
   elpas,
   elpasMirror,
+  lastUpdated,
 };
