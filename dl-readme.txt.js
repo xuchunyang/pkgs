@@ -39,7 +39,7 @@ process.chdir("data/commentary");
       response.data.pipe(fs.createWriteStream(filename));
       debug("Done");
     } catch (error) {
-      if (error.response?.status === 404) {
+      if (error.response && error.response.status === 404) {
         debug("404 跳过");
       } else {
         throw error;

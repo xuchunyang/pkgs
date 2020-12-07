@@ -39,21 +39,21 @@ function getPkgs() {
     sortedPkgs[name] = pkg;
 
     for (const elpa in elpas) {
-      if (pkg[elpa]?.desc) {
+      if (pkg[elpa] && pkg[elpa].desc) {
         pkg.desc = pkg[elpa].desc;
         break;
       }
     }
 
     for (const elpa in elpas) {
-      if (pkg[elpa]?.props?.url) {
+      if (pkg[elpa] && pkg[elpa].props && pkg[elpa].props.url) {
         pkg.url = pkg[elpa].props.url;
         break;
       }
     }
 
     for (const elpa in elpas) {
-      if (pkg[elpa]?.deps) {
+      if (pkg[elpa] && pkg[elpa].deps) {
         pkg.deps = {};
         const deps = pkg[elpa].deps;
         for (const name in deps) {
