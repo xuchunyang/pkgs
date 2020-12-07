@@ -7,25 +7,24 @@ html
     style
       include style.css
   body
-    #search
-      form
-        input(name="search" type="search" placeholder="Search packages…")
-    table
-      thead
-        tr
-          th Package
-          th Description
-      tbody
-        each pkg in pkgs
+    include nav.pug
+    .container
+      table
+        thead
           tr
-            td <a href="/package/#{pkg.name}">#{pkg.name}</a>
-            td= pkg.desc
-    #pagination
-      - let n = 1;
-      ul
-        while n <= maxPage
-          if n === page
-            li <a href="#" class="active">#{n}</a>
-          else
-            li <a href="/?page=#{n}">#{n}</a>
-          - n++
+            th Package
+            th Description
+        tbody
+          each pkg in pkgs
+            tr
+              td <a href="/package/#{pkg.name}">#{pkg.name}</a>
+              td= pkg.desc
+      #pagination
+        - let n = 1;
+        ul
+          while n <= maxPage
+            if n === page
+              li <a href="#" class="active">#{n}</a>
+            else
+              li <a href="/?page=#{n}">#{n}</a>
+            - n++
