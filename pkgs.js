@@ -38,6 +38,13 @@ function getPkgs() {
       }
     }
 
+    for (const elpa in elpas) {
+      if (pkg[elpa]?.props?.url) {
+        pkg.url = pkg[elpa].props.url;
+        break;
+      }
+    }
+
     pkg.vers = {};
     for (const elpa in elpas) {
       if (pkg[elpa]) {
@@ -45,7 +52,7 @@ function getPkgs() {
         // http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/package-build-20201206.2137.tar
         const ext = pkg[elpa].type === "single" ? ".el" : ".tar";
         const url = elpas[elpa] + pkg.name + "-" + name + ext;
-        pkg.vers[elpa] = { name, url };
+        pkg.vers[elpa] = { name, elpa, url };
       }
     }
   }

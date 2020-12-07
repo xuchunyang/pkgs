@@ -16,10 +16,11 @@ html
       dd
         ul
           for ver in pkg.vers
-            li <a href="#{ver.url}">#{pkg.name}-#{ver.name}</a>
+            li #{ver.elpa} <a href="#{ver.url}">#{pkg.name}-#{ver.name}</a>
 
-      dt Home page
-      dd TODO
+      if pkg.url
+        dt Home page
+        dd <a href="#{pkg.url}">#{pkg.url}</a>
 
     h2 Commentary
     pre TODO
