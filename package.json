@@ -4,7 +4,8 @@
   "description": "Packages Search for GNU ELPA, MELPA, and MELPA-stable.",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "dev": "DEBUG=pkgs nodemon app.js"
   },
   "jest": {
     "testEnvironment": "node"
@@ -14,7 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.0",
-    "debug": "^4.3.1"
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^7.15.0",

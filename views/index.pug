@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Packages Search for Emacs
+    style
+      include style.css
+  body
+    ol
+      each pkg in pkgs
+        li #{pkg.name}
