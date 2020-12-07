@@ -1,13 +1,20 @@
 const debug = require("debug")("pkgs");
 const fs = require("fs");
 
+const elpas = {
+  gnu: "https://elpa.gnu.org/packages/",
+  melpa: "https://melpa.org/packages/",
+  "melpa-stable": "https://stable.melpa.org/packages/",
+};
+
+const elpasMirror = {
+  gnu: "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/",
+  melpa: "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/",
+  "melpa-stable": "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa-stable/",
+};
+
 function getPkgs() {
   const pkgs = {};
-  const elpas = {
-    gnu: "https://elpa.gnu.org/packages/",
-    melpa: "https://melpa.org/packages/",
-    "melpa-stable": "https://stable.melpa.org/packages/",
-  };
   for (const elpa in elpas) {
     const jsonFile = `./data/${elpa}/archive-contents.json`;
     debug("loading %s ...", jsonFile);
@@ -96,4 +103,11 @@ function getPage(search, page, numPerPage) {
   return { result, maxPage };
 }
 
-module.exports = { pkgsObject, pkgsArray, pkgsNames, getPage };
+module.exports = {
+  pkgsObject,
+  pkgsArray,
+  pkgsNames,
+  getPage,
+  elpas,
+  elpasMirror,
+};
