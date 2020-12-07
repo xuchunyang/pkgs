@@ -22,10 +22,13 @@ app.get("/", (req, res) => {
   const page = parseInt(req.query.page) || 1;
   debug("Page: %d", page);
   const numPerPage = 50;
+  const maxPage = Math.ceil(pkgs.pkgsArray.length / numPerPage);
+  debug("maxPage: %d", maxPage);
   const locals = {
     pkgs: pkgs.getPage(page, numPerPage),
+    page,
+    maxPage,
   };
-  debug(locals);
   res.render("index", locals);
 });
 

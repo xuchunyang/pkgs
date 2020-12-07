@@ -23,6 +23,11 @@ function getPkgs() {
   const sortedPkgs = {};
   for (const name of sortedNames) {
     sortedPkgs[name] = pkgs[name];
+
+    sortedPkgs[name].desc =
+      pkgs[name].melpa?.desc ||
+      pkgs[name].gnu?.desc ||
+      pkgs[name]["melpa-stable"]?.desc;
   }
 
   return sortedPkgs;

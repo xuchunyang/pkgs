@@ -1,0 +1,30 @@
+#pagination ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+#pagination ul a {
+  display: block;
+  padding: 8px 16px;
+}
+
+#pagination a {
+  text-decoration: none;
+}
+
+#pagination a.active {
+  background-color: #4caf50;
+  color: #eee;
+}
+
+#pagination a:link,
+#pagination a:visited {
+  color: #333;
+}
+
+#pagination a:hover {
+  background-color: #ddd;
+}

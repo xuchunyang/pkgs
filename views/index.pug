@@ -7,6 +7,22 @@ html(lang="en")
     style
       include style.css
   body
-    ol
-      each pkg in pkgs
-        li #{pkg.name}
+    table
+      thead
+        tr
+          th Package
+          th Description
+      tbody
+        each pkg in pkgs
+          tr
+            td= pkg.name
+            td= pkg.desc
+    #pagination
+      - let n = 1;
+      ul
+        while n <= maxPage
+          if n === page
+            li <a href="#" class="active">#{n}</a>
+          else
+            li <a href="/?page=#{n}">#{n}</a>
+          - n++
