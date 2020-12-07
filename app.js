@@ -27,6 +27,14 @@ app.get("/", (req, res) => {
   res.render("index", locals);
 });
 
+app.get("/package/:name", (req, res) => {
+  const pkg = pkgs.pkgsObject[req.params.name];
+  if (!pkg) {
+    throw new Error("No such package");
+  }
+  res.render("package", { pkg });
+});
+
 const server = app.listen(
   process.env.PORT || 3000,
   process.env.HOST || "localhost",

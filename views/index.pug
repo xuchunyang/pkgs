@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
@@ -18,7 +18,7 @@ html(lang="en")
       tbody
         each pkg in pkgs
           tr
-            td= pkg.name
+            td <a href="/package/#{pkg.name}">#{pkg.name}</a>
             td= pkg.desc
     #pagination
       - let n = 1;
