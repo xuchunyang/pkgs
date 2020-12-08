@@ -89,12 +89,13 @@ function getPkgs() {
 
         // https://melpa.org/packages/0blayout-20190703.527.el
         const ext = pkg[elpa].type === "single" ? ".el" : ".tar";
-        const downloadUrl = elpas[elpa] + pkg.name + "-" + name + ext;
+        const filename = pkg.name + "-" + name + ext;
+        const downloadUrl = elpas[elpa] + filename;
 
         // https://melpa.org/#/0blayout
         const upstreamUrl = elpasWWW[elpa](pkg.name);
 
-        pkg.vers[elpa] = { name, elpa, downloadUrl, upstreamUrl };
+        pkg.vers[elpa] = { name, elpa, downloadUrl, upstreamUrl, filename };
       }
     }
 

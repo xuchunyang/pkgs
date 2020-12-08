@@ -18,7 +18,7 @@ html
         dd
           ul
             for ver in pkg.vers
-              li elpa: <a href="#{ver.upstreamUrl}">#{ver.elpa}</a>, download: <a href="#{ver.downloadUrl}">#{pkg.name}-#{ver.name}</a>
+              li elpa: <a href="#{ver.upstreamUrl}">#{ver.elpa}</a>, download: <a href="#{ver.downloadUrl}">#{ver.filename}</a>
   
         if pkg.url
           dt Home page
