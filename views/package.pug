@@ -32,7 +32,7 @@ html
                 if dep.name === "emacs"
                   li emacs-#{dep.ver}
                 else
-                  li <a href="/package/#{dep.name}">#{dep.name}</a>
+                  li <a href="/package/#{dep.name}">#{dep.name}-#{dep.ver}</a>
 
         if pkg.props
           for value, name in pkg.props
