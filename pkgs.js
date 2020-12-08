@@ -80,6 +80,13 @@ function getPkgs() {
       pkg.props.authors = authors;
     }
 
+    if (pkg.props.maintainer) {
+      const [_, name, email] = pkg.props.maintainer.match(
+        /^(.+?)(?: <(.+)>)?$/
+      );
+      pkg.props.maintainer = { name, email };
+    }
+
     for (const elpa in elpas) {
       if (pkg[elpa] && pkg[elpa].deps) {
         pkg.deps = {};

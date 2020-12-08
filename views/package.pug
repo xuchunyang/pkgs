@@ -48,6 +48,12 @@ html
                     <span><a href="/?author=#{author.name}">#{author.name}</a> #{author.email} </span>
                   else
                     <span><a href="/?author=#{author.name}">#{author.name}</a></span>
+            else if name === "maintainer"
+              dd 
+                if value.email
+                  <span><a href="/?author=#{value.name}">#{value.name}</a> #{value.email} </span>
+                else
+                  <span><a href="/?author=#{value.name}">#{value.name}</a></span>
             else
               dd= Array.isArray(value) ? value.join(", ") : value
 
