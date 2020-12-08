@@ -122,6 +122,22 @@ function getPkgs() {
     }
   }
 
+  // add rev deps
+  const revDeps = {};
+  for (const pkgName in sortedPkgs) {
+    const deps = sortedPkgs[pkgName].deps;
+    for (const depName in deps) {
+      if (!revDeps[depName]) {
+        revDeps[depName] = [];
+      }
+      revDeps[depName].push(pkgName);
+    }
+  }
+
+  for (const pkgName in sortedPkgs) {
+    sortedPkgs[pkgName].revDeps = revDeps[pkgName];
+  }
+
   return sortedPkgs;
 }
 

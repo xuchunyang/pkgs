@@ -35,6 +35,10 @@ test("getpkgs search by keyword", () => {
   expect(getPage(undefined, 1, 100, "window-management").result.length).toBe(1);
 });
 
-test("author", () => {
+test("check author", () => {
   console.log("Authors of rg:", pkgsObject.rg.props.authors);
+});
+
+test("check revDeps", () => {
+  expect(pkgsObject.dash.revDeps.length).toBeGreaterThanOrEqual(10);
 });
