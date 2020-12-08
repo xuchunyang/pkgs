@@ -70,6 +70,16 @@ function getPkgs() {
       }
     }
 
+    if (pkg.props.authors) {
+      let authors = [];
+      // "Oleh Krehel <ohwoeowho@gmail.com>"
+      pkg.props.authors.forEach((s) => {
+        const [_, name, email] = s.match(/^(.+?)(?: <(.+)>)?$/);
+        authors.push({ name, email });
+      });
+      pkg.props.authors = authors;
+    }
+
     for (const elpa in elpas) {
       if (pkg[elpa] && pkg[elpa].deps) {
         pkg.deps = {};
@@ -113,10 +123,18 @@ const pkgsArray = Object.values(pkgsObject);
 const pkgsNames = Object.keys(pkgsObject);
 
 // XXX cache search results? worth? if so how?
-function getPage(search, page, numPerPage, keyword) {
+function getPage(search, page, numPerPage, keyword, author) {
   const skip = (page - 1) * numPerPage;
   let matches;
-  if (keyword) {
+  if (author) {
+    matches = pkgsArray.filter((pkg) => {
+      return (
+        pkg.props &&
+        pkg.props.authors &&
+        pkg.props.authors.find(({ name }) => name === author)
+      );
+    });
+  } else if (keyword) {
     matches = pkgsArray.filter(
       (pkg) =>
         pkg.props && pkg.props.keywords && pkg.props.keywords.includes(keyword)

@@ -41,6 +41,13 @@ html
               dd
                 for keyword in value
                   span <span><a href="/?keyword=#{keyword}">#{keyword}</a>, </span>
+            else if name === "authors"
+              dd
+                for author in value
+                  if author.email
+                    <span><a href="/?author=#{author.name}">#{author.name}</a> #{author.email} </span>
+                  else
+                    <span><a href="/?author=#{author.name}">#{author.name}</a></span>
             else
               dd= Array.isArray(value) ? value.join(", ") : value
 

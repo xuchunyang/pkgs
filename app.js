@@ -28,9 +28,10 @@ const lastUpdated = new Date(
 app.get("/", (req, res) => {
   const search = req.query.search;
   const keyword = req.query.keyword;
+  const author = req.query.author;
   const page = parseInt(req.query.page) || 1;
   debug("%o", { search, page });
-  const { result, maxPage } = pkgs.getPage(search, page, 50, keyword);
+  const { result, maxPage } = pkgs.getPage(search, page, 50, keyword, author);
   const locals = {
     search,
     pkgs: result,

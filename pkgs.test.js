@@ -32,5 +32,9 @@ test("pkg contains desc and vers", () => {
 
 test("getpkgs search by keyword", () => {
   // 一个结果 0blayout
-  expect(getPage(undefined, 1, 100, "window-management").length).toBe(1);
+  expect(getPage(undefined, 1, 100, "window-management").result.length).toBe(1);
+});
+
+test("author", () => {
+  console.log("Authors of rg:", pkgsObject.rg.props.authors);
 });
