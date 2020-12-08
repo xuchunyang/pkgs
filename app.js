@@ -27,9 +27,10 @@ const lastUpdated = new Date(
 // IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {
   const search = req.query.search;
+  const keyword = req.query.keyword;
   const page = parseInt(req.query.page) || 1;
   debug("%o", { search, page });
-  const { result, maxPage } = pkgs.getPage(search, page, 50);
+  const { result, maxPage } = pkgs.getPage(search, page, 50, keyword);
   const locals = {
     search,
     pkgs: result,

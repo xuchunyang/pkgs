@@ -29,3 +29,8 @@ test("pkg contains desc and vers", () => {
   expect(pkgsObject.magit.desc).toBeDefined();
   expect(pkgsObject.magit.vers).toBeDefined();
 });
+
+test("getpkgs search by keyword", () => {
+  // 一个结果 0blayout
+  expect(getPage(undefined, 1, 100, "window-management").length).toBe(1);
+});

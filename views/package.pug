@@ -37,7 +37,12 @@ html
         if pkg.props
           for value, name in pkg.props
             dt= name[0].toUpperCase() + name.slice(1)
-            dd= Array.isArray(value) ? value.join(", ") : value
+            if name === "keywords"
+              dd
+                for keyword in value
+                  span <span><a href="/?keyword=#{keyword}">#{keyword}</a>, </span>
+            else
+              dd= Array.isArray(value) ? value.join(", ") : value
 
       if pkg.commentary
         h2 Commentary

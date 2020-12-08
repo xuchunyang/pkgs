@@ -113,10 +113,15 @@ const pkgsArray = Object.values(pkgsObject);
 const pkgsNames = Object.keys(pkgsObject);
 
 // XXX cache search results? worth? if so how?
-function getPage(search, page, numPerPage) {
+function getPage(search, page, numPerPage, keyword) {
   const skip = (page - 1) * numPerPage;
   let matches;
-  if (!search) {
+  if (keyword) {
+    matches = pkgsArray.filter(
+      (pkg) =>
+        pkg.props && pkg.props.keywords && pkg.props.keywords.includes(keyword)
+    );
+  } else if (!search) {
     matches = pkgsArray;
   } else {
     matches = [];
