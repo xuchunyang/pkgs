@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
   const keyword = req.query.keyword;
   const author = req.query.author;
   const page = parseInt(req.query.page) || 1;
-  debug("%o", { search, page });
+  debug("%o", { search, page, keyword, author });
   const { result, maxPage } = pkgs.getPage(search, page, 50, keyword, author);
   const locals = {
     search,
