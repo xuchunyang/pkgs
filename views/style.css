@@ -83,6 +83,12 @@ footer {
   text-align: center;
 }
 
+footer a:link,
+footer a:visited {
+  color: #666;
+}
+
+
 /* http://elpa.gnu.org/layout.css */
 pre {
   font-size: 14px;
