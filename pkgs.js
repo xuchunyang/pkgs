@@ -7,6 +7,15 @@ const elpas = {
   "melpa-stable": "https://stable.melpa.org/packages/",
 };
 
+// https://melpa.org/#/0blayout
+// https://elpa.gnu.org/packages/ace-window.html
+// https://stable.melpa.org/#/0blayout
+const elpasWWW = {
+  gnu: (name) => `https://elpa.gnu.org/packages/${name}.html`,
+  melpa: (name) => `https://melpa.org/#/${name}`,
+  "melpa-stable": (name) => `https://stable.melpa.org/#/${name}`,
+};
+
 const elpasMirror = {
   gnu: "https://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/",
   melpa: "https://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/",
@@ -77,10 +86,15 @@ function getPkgs() {
     for (const elpa in elpas) {
       if (pkg[elpa]) {
         const name = pkg[elpa].ver.join(".");
-        // http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/package-build-20201206.2137.tar
+
+        // https://melpa.org/packages/0blayout-20190703.527.el
         const ext = pkg[elpa].type === "single" ? ".el" : ".tar";
-        const url = elpas[elpa] + pkg.name + "-" + name + ext;
-        pkg.vers[elpa] = { name, elpa, url };
+        const downloadUrl = elpas[elpa] + pkg.name + "-" + name + ext;
+
+        // https://melpa.org/#/0blayout
+        const upstreamUrl = elpasWWW[elpa](pkg.name);
+
+        pkg.vers[elpa] = { name, elpa, downloadUrl, upstreamUrl };
       }
     }
 
