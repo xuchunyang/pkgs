@@ -12,7 +12,7 @@ app.use(morgan("dev"));
 // app.use("/api", express.static("data"));
 
 // for debug purpose
-app.get("/api/packages/:name", (req, res) => {
+app.get("/api/package/:name", (req, res) => {
   res.json(pkgs.pkgsObject[req.params.name]);
 });
 
