@@ -34,6 +34,11 @@ html
                 else
                   li <a href="/package/#{dep.name}">#{dep.name}</a>
 
+        if pkg.props
+          for value, name in pkg.props
+            dt= name[0].toUpperCase() + name.slice(1)
+            dd= Array.isArray(value) ? value.join(", ") : value
+
       if pkg.commentary
         h2 Commentary
         pre= pkg.commentary

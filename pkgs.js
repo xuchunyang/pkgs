@@ -52,6 +52,15 @@ function getPkgs() {
       }
     }
 
+    pkg.props = {};
+    for (const elpa in elpas) {
+      if (pkg[elpa] && pkg[elpa].props) {
+        Object.assign(pkg.props, pkg[elpa].props);
+        delete pkg.props.url;
+        break;
+      }
+    }
+
     for (const elpa in elpas) {
       if (pkg[elpa] && pkg[elpa].deps) {
         pkg.deps = {};
