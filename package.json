@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "dev": "DEBUG=pkgs nodemon app.js"
+    "start": "node app.js",
+    "start:dev": "DEBUG=pkgs* nodemon app.js"
   },
   "jest": {
     "testEnvironment": "node"
