@@ -64,6 +64,12 @@ html
                   <span><a href="/?author=#{value.name}">#{value.name}</a> #{value.email} </span>
                 else
                   <span><a href="/?author=#{value.name}">#{value.name}</a></span>
+            else if name === "commit"
+                dd
+                  if value.url
+                    a(href=value.url)= value.hash
+                  else
+                    | #{value.hash}
             else
               dd= Array.isArray(value) ? value.join(", ") : value
 

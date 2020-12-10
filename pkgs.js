@@ -1,5 +1,6 @@
 const debug = require("debug")("pkgs");
 const fs = require("fs");
+const epkgs = require("./epkgs");
 
 const elpas = {
   gnu: "https://elpa.gnu.org/packages/",
@@ -85,6 +86,12 @@ function getPkgs() {
         /^(.+?)(?: <(.+)>)?$/
       );
       pkg.props.maintainer = { name, email };
+    }
+
+    if (pkg.props.commit) {
+      const hash = pkg.props.commit;
+      const url = epkgs.commitUrl(pkg.name, hash);
+      pkg.props.commit = { hash, url };
     }
 
     for (const elpa in elpas) {

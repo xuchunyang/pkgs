@@ -3,3 +3,4 @@
 /package-build/
 /*.tar
 /package-lock.json
+*.sqlite3
