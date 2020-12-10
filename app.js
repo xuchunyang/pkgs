@@ -29,7 +29,7 @@ app.locals.commitDate = new Date(
   execa.commandSync("git show --no-patch --format=%cI HEAD").stdout
 );
 app.locals.commitUrl =
-  "https://github.com/xuchunyang/pkgs/" + app.locals.commit;
+  "https://github.com/xuchunyang/pkgs/commit/" + app.locals.commit;
 
 // IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {
