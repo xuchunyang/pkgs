@@ -1,4 +1,5 @@
 nav
-  <a href="/">Home</a>
-  form#search(action="/")
-    input(name="search" type="search" placeholder="Search packages…" value=`${search ? search : ''}`)
+  a(href="/") Home
+  form(action="/")
+    label(for="search") Filter Packages by Name:
+    input#search(name="search" type="search" placeholder="e.g., magit" value=(search || '') required)

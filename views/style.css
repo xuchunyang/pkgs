@@ -20,7 +20,7 @@ nav {
   margin: 0 1em;
 }
 
-#search input[type="search"] {
+input[type="search"] {
   font-family: inherit;
   font-size: 100%;
   padding: 5px;
