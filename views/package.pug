@@ -37,16 +37,20 @@ html
         if pkg.revDeps
           dt Needed by
           dd
-            for name in pkg.revDeps
-              <span><a href="/package/#{name}">#{name}</a> / </span>
+            for name, index in pkg.revDeps
+              a(href="/package/" + name)= name
+              if index < pkg.revDeps.length - 1
+                |, 
 
         if pkg.props
           for value, name in pkg.props
             dt= name[0].toUpperCase() + name.slice(1)
             if name === "keywords"
               dd
-                for keyword in value
-                  span <span><a href="/?keyword=#{keyword}">#{keyword}</a>, </span>
+                for keyword, index in value
+                  a(href="/?keyword=" + keyword)= keyword
+                  if index < value.length - 1
+                    |, 
             else if name === "authors"
               dd
                 for author in value
