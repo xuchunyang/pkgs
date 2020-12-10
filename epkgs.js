@@ -11,37 +11,25 @@ const db = new Database(dbfile, {
   verbose: console.log,
 });
 
-const stmt = db.prepare("SELECT name, repopage FROM packages");
-const packages = stmt.all();
+const stmt = db.prepare("SELECT * FROM melpa_recipes");
+const melpa_recipes = stmt.all();
 db.close();
-debug("# of Packages: %d", packages.length);
-debug("Package value: %o", packages[0]);
-debug(
-  "# of Packages: %o",
-  packages.find((p) => p.repopage === null)
-);
+debug("# of melpa recipes: %d", melpa_recipes.length);
+debug("Package value: %o", melpa_recipes[0]);
 
 module.exports = {
   commitUrl(package_name, commit) {
     // epkgs 的字符串大多加了引号（适用于 Emacs read 函数）
-    const pkg = packages.find((p) => p.name === `"${package_name}"`);
-    if (!pkg) {
-      // epkgs 好像是按 repo 组织的，比如没有 git-commit 这个包，它包含在 magit repo 中国呢
-      // debug("epkgs 数据库没有收录 %s", package_name);
-      //
-      // FIXME 还不如直接用 melpa 的方案，支持 git-commit
-      // https://melpa.org/recipes.json
+    const recipe = melpa_recipes.find((r) => r.name === `"${package_name}"`);
+    if (!recipe) {
       return;
     }
-    if (!pkg.repopage) {
+    if (!recipe.repopage) {
       return;
     }
-    if (!/github\.com\/|gitlab\.com\/|sr\.hr\//.test(pkg.repopage)) {
-      return;
-    }
-    const repopage_without_quotes = pkg.repopage.slice(
+    const repopage_without_quotes = recipe.repopage.slice(
       1,
-      pkg.repopage.length - 1
+      recipe.repopage.length - 1
     );
     return `${repopage_without_quotes}/commit/${commit}`;
   },
