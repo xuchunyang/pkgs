@@ -24,12 +24,16 @@ app.locals.datefns = require("date-fns");
 const lastUpdated = new Date(
   parseInt(fs.readFileSync("./data/update_timestamp", "utf8")) * 1000
 );
-app.locals.commit = execa.commandSync("git rev-parse --verify HEAD").stdout;
-app.locals.commitDate = new Date(
-  execa.commandSync("git show --no-patch --format=%cI HEAD").stdout
-);
-app.locals.commitUrl =
-  "https://github.com/xuchunyang/pkgs/commit/" + app.locals.commit;
+app.locals.commit = {
+  shortHash: execa.commandSync("git show --no-patch --format=%h HEAD").stdout,
+  date: new Date(
+    execa.commandSync("git show --no-patch --format=%cI HEAD").stdout
+  ),
+  get url() {
+    return "https://github.com/xuchunyang/pkgs/commit/" + this.shortHash;
+  },
+  subject: execa.commandSync("git show --no-patch --format=%s HEAD").stdout,
+};
 
 // IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {
