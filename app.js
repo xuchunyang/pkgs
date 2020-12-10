@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const pkgs = require("./pkgs");
 const fs = require("fs");
+const execa = require("execa");
 
 const app = express();
 app.use(morgan("dev"));
@@ -23,6 +24,12 @@ app.locals.datefns = require("date-fns");
 const lastUpdated = new Date(
   parseInt(fs.readFileSync("./data/update_timestamp", "utf8")) * 1000
 );
+app.locals.commit = execa.commandSync("git rev-parse --verify HEAD").stdout;
+app.locals.commitDate = new Date(
+  execa.commandSync("git show --no-patch --format=%cI HEAD").stdout
+);
+app.locals.commitUrl =
+  "https://github.com/xuchunyang/pkgs/" + app.locals.commit;
 
 // IDEA ajax to avoid full page reload?
 app.get("/", (req, res) => {

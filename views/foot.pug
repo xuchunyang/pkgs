@@ -1,3 +1,6 @@
 footer
   div Packages index updates once per day, last updated at <time datetime="#{lastUpdated.toISOString()}">#{datefns.format(lastUpdated, "yyyy-MM-dd HH:mm")}</time>
+  div Website code last updated at #{datefns.format(commitDate, "yyyy-MM-dd HH:mm")} with commit 
+    |
+    a(href=commitUrl)= commit.slice(0, 6)
   div <a href="https://github.com/xuchunyang/pkgs">View website source on GitHub</a> | <a href="http://beian.miit.gov.cn/">苏ICP备2020065056号</a>
